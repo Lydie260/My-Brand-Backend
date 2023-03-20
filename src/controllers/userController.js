@@ -1,25 +1,25 @@
-
+import status from "http-status";
+import Response from "../utilis/response.js";
 
  const createUser = (Model) => async (req, res, next) => {
     let reqData = req.body
-  
-  try {
+  {
+    try {
    
-    const doc = await Model.create(reqData);
-    if (!doc) {
-        return res.status (404).json ({message:{
-            "status" : "fail",
-            "data" : doc
-        }});
-
+        const doc = await Model.create(reqData);
+        if (!doc)
+        {
+            return Response.errorMessage(
+                res,
+                "failed to register",
+                status.BAD_REQUEST
+              );        }
+        return Response.succesMessage(res, "user created successfuly ", doc, status.OK);
+    }catch(error){
+      console.log(error)
     }
-    return res.status(200).json({message: {
-        status : "success",
-        data : doc
-    }});
-}catch(error){
-  console.log(error)
-}
+  }
+ 
 };
 
 //get all datas
@@ -32,9 +32,9 @@
                 return res.status (404).json ({message:"failed to get all"});
             }
             return res.status (200).json ({message:"succcessfully retrieved data",data:doc});
-        }catch (error) {
-            console.log (error)
-        }
+        } catch (error) {
+            console.log(error);
+          }
         }
 };
 
@@ -45,9 +45,9 @@
         try {
             const doc = await Model.findById(req.params.id).select("-password");
             if (!doc) {
-                return res.status (404).json ({message:"failed to retrieved"});
+                return Response.errorMessage(res, "failed to retrieve data!", status.BAD_REQUEST);
             }
-            return res.status (200).json ({message:"succcessfully user retrieved",data:doc});
+            return Response.successMessage (res, "succcessfully got one user", doc, status.OK);
         }catch (error) {
             console.log (error)
         }

@@ -8,8 +8,8 @@ const router = Router();
 router.post("/api/create-blog",protect, blogControllers.createBlog(blogModel));
 router.get("/api/get-all-blogs",blogControllers.getAllBlogs(blogModel));
 router.get("/api/blog/:id",blogControllers.getOneBlog(blogModel));
-router.put("/api/blog-update/:id", blogControllers.updateBlog);
-router.delete("/api/delete-blog/:id", blogControllers.deleteBlog);
+router.put("/api/blog-update/:id", blogControllers.updateBlog(blogModel));
+router.delete("/api/delete-blog/:id", blogControllers.deleteBlog(blogModel));
 router.post("/api/blog/:blog_id/comment",protect,commentingOnblog);
 router.post("/api/blog/:blog_id/like",protect, likeblog);
 

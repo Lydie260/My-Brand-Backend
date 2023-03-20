@@ -12,9 +12,10 @@ const app = express();
 //const swaggerJSDoc = require("swagger-jsdoc");
 app.use(bodyParser.json());
 app.use(fileUploader({ useTempFiles: true }));
+app.use(cors())
 app.use ('/',routes)
 app.use('/',routers)
-app.use(cors())
+
 app.use("/mybrand",swaggerDoc)
 
 
