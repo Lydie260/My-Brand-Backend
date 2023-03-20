@@ -1,5 +1,10 @@
 import blogModel from "../models/blogModel.js";
 import userModel from "../models/userModel.js";
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, "0");
+var mm = String(today.getMonth() + 1).padStart(2, "0");
+var yyyy = today.getFullYear();
+today = dd + "/" + mm + "/" + yyyy;
 
 const createBlog = (Model) => async (req, res, next) => {
     let reqData = req.body;
@@ -91,7 +96,7 @@ export const commentingOnblog = (req, res) => {
     const { blog_id } = req.params;
     const { comment } = req.body;
     // console.log(blog_id);
-    user_id.findOne({
+    userModel.findOne({
       _id: req.user.id
     }).then((user) => {
   //  console.log(user);

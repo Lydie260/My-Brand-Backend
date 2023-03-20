@@ -280,7 +280,7 @@ const options = {
     },
   
 
-    "api/blog-update/{id}": {
+    "/api/blog-update/{id}": {
       put: {
         tags: ["Blog"],
         description: "Update blog ",
@@ -321,7 +321,7 @@ const options = {
         },
       },
     },
-    "/delete-blog/{id}": {
+    "/api/delete-blog/{id}": {
       delete: {
         tags: ["Blog"],
         description: "Delete blog ",
