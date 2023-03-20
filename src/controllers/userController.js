@@ -29,9 +29,13 @@ import Response from "../utilis/response.js";
         try {
             const doc = await Model.find().select("-password");
             if (!doc) {
-                return res.status (404).json ({message:"failed to get all"});
-            }
-            return res.status (200).json ({message:"succcessfully retrieved data",data:doc});
+                return Response.errorMessage(
+                    res,
+                    "failed to get all",
+                    status.BAD_REQUEST
+                  );              }
+            return Response.succesMessage(res, "succcessfully retrieved data ", doc, status.OK);
+
         } catch (error) {
             console.log(error);
           }
@@ -45,9 +49,13 @@ import Response from "../utilis/response.js";
         try {
             const doc = await Model.findById(req.params.id).select("-password");
             if (!doc) {
-                return Response.errorMessage(res, "failed to retrieve data!", status.BAD_REQUEST);
-            }
+                return Response.errorMessage(
+                    res,
+                    "failed to get one",
+                    status.BAD_REQUEST
+                  );              }
             return Response.successMessage (res, "succcessfully got one user", doc, status.OK);
+            
         }catch (error) {
             console.log (error)
         }
@@ -63,9 +71,13 @@ import Response from "../utilis/response.js";
                 new:true,
             }).select("-password");
             if (!doc) {
-                return res.status (404).json ({message:"failed to update"});
-            }
-            return res.status (200).json ({message:"succcessfully updated",data:doc});
+                return Response.errorMessage(
+                    res,
+                    "failed to update user",
+                    status.BAD_REQUEST
+                  );              }
+            return Response.succesMessage(res, "user updated successfuly ", doc, status.OK);
+
         }catch (error) {
             console.log (error)
         }
@@ -79,9 +91,14 @@ import Response from "../utilis/response.js";
         try {
             const doc = await Model.findByIdAndDelete(req.params.id).select("-password");;
             if (!doc) {
-                return res.status (404).json ({message:""});
-            }
-            return res.status (200).json ({message:"succcessfully deleted",data:doc});
+                return Response.errorMessage(
+                    res,
+                    "failed to delete user",
+                    status.BAD_REQUEST
+                  );              }
+            return Response.succesMessage(res, "user deleted successfuly ", doc, status.OK);
+
+            
         }catch (error) {
             console.log (error)
         }
