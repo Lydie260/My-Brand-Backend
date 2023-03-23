@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "test": "jest",
-    "dev-server": "nodemon --exec babel-node ./src/server.js"
+    "start": "nodemon --exec babel-node ./src/server.js"
   },
   "author": "",
   "license": "ISC",

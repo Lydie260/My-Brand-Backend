@@ -1,16 +1,27 @@
 import blogModel from "../models/blogModel.js";
 import userModel from "../models/userModel.js";
+import imageUpload from "../helper/imageUpload.js";
+
+
+
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, "0");
 var mm = String(today.getMonth() + 1).padStart(2, "0");
 var yyyy = today.getFullYear();
 today = dd + "/" + mm + "/" + yyyy;
 
+
+
 const createBlog = (Model) => async (req, res, next) => {
     let reqData = req.body;
     try {
       if (req.user.role.toString() == "Admin") {
-     
+        let imageUrl = "";
+        if (req.files) {
+          const image = await imageUpload(req);
+          imageUrl = image.url;
+          reqData.image = imageUrl;
+        }
         const doc = await Model.create(reqData);
         if (!doc) {
             return res.status (404).json ({message:"failed to create a blog"});

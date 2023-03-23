@@ -364,7 +364,7 @@ const options = {
     "/api/blog/{blog_id}/like": {
       post: {
         tags: ["Blog"],
-        description: "Like on  blog ",
+        description: "Liking on  blog ",
         parameters: [
           {
             in: "path",
@@ -401,11 +401,11 @@ const options = {
     "/api/blog/{blog_id}/comment": {
       post: {
         tags: ["Blog"],
-        description: "Comment on article blog article",
+        description: "Commenting on  blog ",
         parameters: [
           {
             in: "path",
-            name: "article_id",
+            name: "blog_id",
             required: true,
           },
         ],
@@ -440,7 +440,35 @@ const options = {
     },
 
 
+//Message
 
+"/api/sendMessage": {
+  post: {
+    tags: ["Message"],
+    description: "send new Message ",
+    requestBody: {
+      content: {
+        'multipart/form-data': {
+          schema: {
+            $ref: "#/components/schemas/message",
+          },
+        },
+      },
+      required: true,
+    },
+    responses: {
+      200: {
+        description: "successfully",
+      },
+      401: {
+        description: "User Not Authorized",
+      },
+      500: {
+        description: "Internal Server Error",
+      },
+    },
+  },
+},
 
 
 
@@ -502,9 +530,18 @@ const options = {
             type: "string",
 
           },
+          postedDate:{
+            type:"string",
+
+
+          },
           content: {
             type: "string",
             description: "blog content",
+          },
+          postedDate:{
+            type: "string",
+            description:"date"
           },
           image: {
             type: "string",
@@ -513,23 +550,27 @@ const options = {
           },
         },
       },
-      // Comment: {
-      //   type: "object",
-      //   properties : {
-      //     name: {
-      //       type: "String",
-      //       description: "sender's email",
-      //     },
-      //     email:{
-      //       type: "String",
-      //       description: "sender's email"
-      //     },
-      //     comment: {
-      //       type: "String",
-      //       description: "comment",
-      //     }
-      //   }
-      // },
+      message: {
+        type: "object",
+        properties : {
+          names: {
+            type: "String",
+            description: "sender's Name",
+          },
+          email:{
+            type: "String",
+            description: "sender's email"
+          },
+          subject: {
+            type: "String",
+            description: "sender's subject"
+          },
+          text: {
+            type: "String",
+            description: "message",
+          }
+        }
+      },
 
 
     },
@@ -543,4 +584,3 @@ const options = {
   },
 };
  export default docrouter.use("/", serve, setup(options));
-//module.exports = docrouter;
