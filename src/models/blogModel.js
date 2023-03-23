@@ -1,3 +1,4 @@
+import { string } from "joi";
 import mongoose from "mongoose";
 
 const blogSchema = new mongoose.Schema(
@@ -5,13 +6,13 @@ const blogSchema = new mongoose.Schema(
     title: String,
     author: String,
     content: String,
+    postedDate:String,
     image: String,
     comments: [
       {
-        user_id: {
+        blog_id: {
           type: mongoose.Schema.ObjectId,
           required: true,
-          ref: "User",
         },
         email: {
           type: String,
@@ -21,10 +22,7 @@ const blogSchema = new mongoose.Schema(
           type: String,
           required: [true, "Please add a comment"],
         },
-        postedDate: {
-          type: String,
-          required: true,
-        },
+     
       },
     ],
     likes: [

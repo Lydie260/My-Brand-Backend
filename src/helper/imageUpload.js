@@ -1,5 +1,5 @@
 import uploader from "../config/claudanary.js"
-const articleImage = async (req) => {
+const imageUpload = async (req) => {
   try {
     const tmp = req.files.image.tempFilePath;
     const Result = await uploader.upload(
@@ -12,4 +12,4 @@ const articleImage = async (req) => {
     console.log(error);
   }
 };
-export default articleImage
+export default imageUpload

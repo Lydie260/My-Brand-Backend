@@ -1,46 +1,29 @@
-import mongoose from "mongoose";
-const Schema = new mongoose.Schema(
-  {
-    title: String,
-    content: String,
-    comments: [
-      {
-        user_id: {
-          type: mongoose.Schema.ObjectId,
-          required: true,
-          ref: "user",
-        },
-        email: {
-          type: String,
-          required: true,
-        },
-        comment: {
-          type: String,
-          required: [true, "Please add a comment"],
-        },
-        postedDate: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
-    likes: [
-      {
-        user_id: {
-          type: mongoose.Schema.ObjectId,
-          required: true,
-          ref: "user",
-        },
-      },
-    ],
+
+
+import mongoose from 'mongoose';
+
+const messageSchema = new mongoose.Schema({
+
+  names: {
+    type: String,
   },
-  { timestamps: true }
-);
-export default mongoose.model("blog", Schema);
+  email: {
+    type: String,
+    
+  },
+  subject: {
+    type: String,
+  },
 
 
+  text: {
+    type: String,
+  },
 
+  
 
+}, {
+  timestamps: true
+});
 
-
-
+export default mongoose.model('message', messageSchema);
